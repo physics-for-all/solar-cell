@@ -2,723 +2,2145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b33">
 
-<title>Solar Cells: Physics, Properties, Efficiency and Applications</title>
+  <title>SolarCell Explorer | Solar Energy & Photovoltaic Science</title>
+  <meta name="description" content="Explore the science of solar cells, photovoltaic effect, semiconductor materials, electrical properties, I-V and P-V curves, efficiency, and renewable energy applications.">
+  <meta name="keywords" content="solar cells, photovoltaic effect, solar energy, I-V curve, P-V curve, solar cell efficiency, semiconductor materials">
+  <meta name="author" content="SolarCell Explorer">
 
-<meta name="description"
-content="Detailed scientific guide to solar cells, photovoltaic effect, semiconductor properties, I-V characteristics, fill factor, efficiency, interactive graphs and renewable energy applications.">
+  <meta property="og:title" content="SolarCell Explorer | Discover Solar Energy">
+  <meta property="og:description" content="An interactive educational guide to solar cells, photovoltaic science, and clean energy.">
+  <meta property="og:type" content="website">
 
-<meta name="robots" content="index, follow">
-<meta name="author" content="Moez Hajji">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root {
-  --navy: #102a43;
-  --blue: #1677bd;
-  --gold: #ffc857;
-  --light: #f1f7fc;
-  --text: #243b53;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font: 17px/1.8 Arial, sans-serif;
-  color: var(--text);
-  background: #f5f8fb;
-}
-header {
-  padding: 65px 7%;
-  color: white;
-  background: linear-gradient(130deg, #102a43, #1677bd);
-}
-header h1 {
-  font-size: clamp(34px, 5vw, 58px);
-  line-height: 1.15;
-  max-width: 950px;
-}
-header p { max-width: 850px; font-size: 20px; }
-nav {
-  background: white;
-  padding: 16px 5%;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid #d9e2ec;
-}
-nav a {
-  display: inline-block;
-  margin: 4px 12px 4px 0;
-  color: #1266a4;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-}
-main { max-width: 1100px; margin: auto; padding: 24px; }
-section {
-  background: white;
-  margin: 22px 0;
-  padding: clamp(20px, 4vw, 38px);
-  border-radius: 15px;
-  border: 1px solid #d9e2ec;
-}
-h2 { color: var(--navy); line-height: 1.3; }
-h3 { color: #1769aa; }
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-.card {
-  background: var(--light);
-  padding: 18px;
-  border-radius: 10px;
-}
-.formula {
-  background: var(--navy);
-  color: white;
-  padding: 18px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 20px;
-  overflow-wrap: anywhere;
-}
-.note {
-  border-left: 5px solid var(--blue);
-  background: var(--light);
-  padding: 14px 18px;
-}
-table { border-collapse: collapse; width: 100%; }
-th, td {
-  border: 1px solid #d9e2ec;
-  padding: 12px;
-  text-align: left;
-}
-th { background: #eaf3fb; }
-.table-scroll { overflow-x: auto; }
-canvas {
-  width: 100%;
-  height: 340px;
-  display: block;
-  border: 1px solid #d9e2ec;
-  border-radius: 10px;
-}
-label { display: block; margin: 12px 0; }
-input { max-width: 100%; }
-footer {
-  background: var(--navy);
-  color: white;
-  padding: 30px 7%;
-  text-align: center;
-}
-@media(max-width:600px) {
-  main { padding: 12px; }
-  section { padding: 18px; }
-  nav { position: relative; }
-  canvas { height: 280px; }
-}
-</style>
+  <style>
+    :root {
+      --navy: #071b33;
+      --navy-2: #0b2948;
+      --blue: #0879e8;
+      --cyan: #36c7ed;
+      --gold: #ffc52e;
+      --ink: #10253e;
+      --muted: #65758a;
+      --surface: #ffffff;
+      --page: #f3f7fc;
+      --line: #e3ebf4;
+      --radius: 20px;
+      --shadow: 0 14px 38px rgba(17, 48, 83, .07);
+      --max-width: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      background: var(--page);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Manrope", sans-serif;
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, input { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .section { padding: 92px 0; }
+
+    .section-white { background: #fff; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #0879e8;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      height: 2px;
+      width: 24px;
+      background: var(--gold);
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 660px;
+      margin-bottom: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 21px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .92rem;
+      cursor: pointer;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #14253a;
+      background: var(--gold);
+      box-shadow: 0 8px 24px rgba(255,197,46,.2);
+    }
+
+    .btn-primary:hover { background: #ffda69; }
+
+    .btn-outline {
+      border-color: rgba(255,255,255,.5);
+      color: white;
+      background: rgba(255,255,255,.06);
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,.14); }
+
+    /* Navigation */
+
+    .navbar {
+      position: sticky;
+      z-index: 1000;
+      top: 0;
+      background: rgba(7,27,51,.96);
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-family: "Manrope", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      background: rgba(255,197,46,.13);
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: #d6e2f1;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+      border-radius: 10px;
+      padding: 7px 12px;
+      cursor: pointer;
+    }
+
+    /* Hero */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 78% 25%, rgba(17,130,225,.28), transparent 36%),
+        linear-gradient(120deg, #06182c 0%, #092b4d 60%, #0b426a 100%);
+      color: #fff;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .13;
+      background-image: linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to right, black, transparent);
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 55px;
+      align-items: center;
+      min-height: 610px;
+      padding-block: 80px;
+    }
+
+    .hero .eyebrow { color: #b8dcff; }
+
+    .hero h1 {
+      max-width: 720px;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -.06em;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero-copy {
+      max-width: 570px;
+      color: #c9d9ea;
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 23px;
+      margin-top: 34px;
+      color: #dbe7f4;
+      font-size: .83rem;
+    }
+
+    .hero-points span { display: inline-flex; align-items: center; gap: 8px; }
+
+    .hero-points b { color: var(--gold); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 380px;
+      display: grid;
+      place-items: center;
+    }
+
+    .sun-orbit {
+      position: absolute;
+      width: min(390px, 90%);
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 50%;
+      animation: orbit 35s linear infinite;
+    }
+
+    .sun-orbit::before {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: var(--gold);
+      box-shadow: 0 0 28px var(--gold);
+      border-radius: 50%;
+      top: 14%;
+      left: 12%;
+    }
+
+    .solar-illustration {
+      position: relative;
+      width: 90%;
+      max-width: 440px;
+      aspect-ratio: 1.05;
+      filter: drop-shadow(0 25px 40px rgba(0,0,0,.3));
+    }
+
+    .solar-illustration svg { width: 100%; height: 100%; }
+
+    .floating-stat {
+      position: absolute;
+      bottom: 22px;
+      left: 0;
+      padding: 17px 20px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(8,34,60,.82);
+      border-radius: 16px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.15);
+      backdrop-filter: blur(12px);
+    }
+
+    .floating-stat strong {
+      display: block;
+      font-size: 1.35rem;
+      color: var(--gold);
+    }
+
+    .floating-stat span { font-size: .75rem; color: #d1dfef; }
+
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    /* Statistics strip */
+
+    .stats-wrap {
+      position: relative;
+      margin-top: -1px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding-block: 29px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 8px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child { border: 0; }
+
+    .stat strong {
+      display: block;
+      font: 800 clamp(1.5rem, 3vw, 2.1rem) "Manrope", sans-serif;
+      color: var(--navy);
+    }
+
+    .stat span { color: var(--muted); font-size: .85rem; }
+
+    /* Importance cards */
+
+    .importance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 27px;
+      box-shadow: var(--shadow);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: #b9dafa;
+      box-shadow: 0 22px 45px rgba(17,48,83,.12);
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 53px;
+      height: 53px;
+      border-radius: 16px;
+      background: #e8f3ff;
+      color: #0879e8;
+      font-size: 1.55rem;
+      margin-bottom: 22px;
+    }
+
+    .feature-card h3 { font-size: 1.08rem; margin-bottom: 10px; }
+
+    .feature-card p { color: var(--muted); font-size: .9rem; margin-bottom: 0; }
+
+    /* How solar cells work */
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .diagram-card {
+      background: linear-gradient(145deg, #09213b, #0d416b);
+      color: white;
+      padding: 32px;
+      border-radius: 26px;
+      box-shadow: 0 25px 50px rgba(7,27,51,.18);
+    }
+
+    .diagram-card h3 { margin-bottom: 8px; }
+
+    .diagram-card p { color: #c2d6e9; font-size: .9rem; }
+
+    .band-diagram { width: 100%; height: auto; margin: 22px 0; }
+
+    .steps { display: grid; gap: 22px; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 47px 1fr;
+      gap: 17px;
+      align-items: start;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: #e6f3ff;
+      color: #0879e8;
+      font-weight: 800;
+    }
+
+    .step h3 { font-size: 1.05rem; margin-bottom: 5px; }
+
+    .step p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    /* Properties */
+
+    .properties {
+      color: white;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(37,156,245,.17), transparent 30%),
+        linear-gradient(125deg, #071b33, #0a3155);
+    }
+
+    .properties .eyebrow { color: #94d6ff; }
+
+    .properties .section-heading p { color: #bed0e2; }
+
+    .properties-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .property-card {
+      padding: 26px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.12);
+      transition: background .2s, transform .2s;
+    }
+
+    .property-card:hover {
+      background: rgba(255,255,255,.1);
+      transform: translateY(-4px);
+    }
+
+    .property-card .symbol {
+      font-size: 1.7rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .property-card h3 { font-size: 1.05rem; margin-bottom: 9px; }
+
+    .property-card p { color: #c1d3e5; font-size: .9rem; margin: 0; }
+
+    .formula-panel {
+      margin-top: 28px;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      text-align: center;
+    }
+
+    .formula {
+      font-family: Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--gold);
+      padding: 15px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .formula-panel p { color: #c1d3e5; font-size: .88rem; margin: 0; }
+
+    /* Electrical characteristics */
+
+    .characteristics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: start;
+    }
+
+    .table-wrap {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+
+    th, td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+
+    th { background: #edf5ff; font-weight: 800; }
+
+    td { color: #42566e; }
+
+    tbody tr:last-child td { border-bottom: 0; }
+
+    tbody tr:hover { background: #f6faff; }
+
+    td:first-child { color: var(--ink); font-weight: 700; }
+
+    .note {
+      color: var(--muted);
+      font-size: .82rem;
+      margin-top: 13px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      margin-top: 23px;
+    }
+
+    .metric {
+      padding: 17px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .metric span { display: block; color: var(--muted); font-size: .8rem; }
+
+    .metric strong { display: block; font-size: 1.12rem; margin-top: 4px; }
+
+    /* Interactive graphs */
+
+    .graphs-section { background: #edf4fc; }
+
+    .graph-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 22px 25px;
+      margin-bottom: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .slider-control { flex: 1; min-width: 220px; }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #0879e8;
+      cursor: pointer;
+    }
+
+    .graph-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .graph-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .graph-card h3 { font-size: 1.13rem; margin-bottom: 5px; }
+
+    .graph-card > p { color: var(--muted); font-size: .84rem; }
+
+    .chart-wrap { width: 100%; }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 13px;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+    .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    .graph-explanation {
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: 16px;
+      background: #e1efff;
+      color: #234b75;
+      font-size: .9rem;
+    }
+
+    .graph-explanation strong { color: #0c3767; }
+
+    /* Technologies */
+
+    .technology-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .tech-card {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .tech-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+    .tech-art {
+      height: 145px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #e7f3ff, #d5e7f8);
+      overflow: hidden;
+    }
+
+    .tech-art svg { width: 115px; height: 105px; }
+
+    .tech-content { padding: 21px; }
+
+    .tech-content h3 { font-size: 1rem; margin-bottom: 8px; }
+
+    .tech-content p { color: var(--muted); font-size: .85rem; margin-bottom: 14px; }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 7px;
+      background: #eaf4ff;
+      color: #0966c1;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    /* Applications */
+
+    .application-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .application-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 190px;
+      padding: 27px;
+      color: #fff;
+      background: linear-gradient(135deg, #092744, #105583);
+      border-radius: 20px;
+    }
+
+    .application-card:nth-child(2n) {
+      background: linear-gradient(135deg, #0b3b4d, #11766d);
+    }
+
+    .application-card .app-icon { font-size: 1.8rem; margin-bottom: 20px; }
+
+    .application-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+
+    .application-card p { font-size: .87rem; color: #d3e5f2; margin-bottom: 0; }
+
+    .application-card::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      right: -35px;
+      bottom: -45px;
+      box-shadow: 0 0 0 20px rgba(255,255,255,.025), 0 0 0 40px rgba(255,255,255,.025);
+    }
+
+    /* Advantages and limitations */
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .compare-card {
+      padding: 28px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .compare-card h3 { font-size: 1.15rem; margin-bottom: 20px; }
+
+    .compare-card ul { list-style: none; padding: 0; margin: 0; }
+
+    .compare-card li {
+      display: flex;
+      gap: 11px;
+      margin-bottom: 13px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .compare-card li:last-child { margin-bottom: 0; }
+
+    .check { color: #079669; font-weight: 900; }
+
+    .cross { color: #d97706; font-weight: 900; }
+
+    /* FAQ */
+
+    .faq-list { max-width: 850px; display: grid; gap: 12px; }
+
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 19px 22px;
+    }
+
+    details[open] { border-color: #a8d1fa; }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+      padding-right: 28px;
+      position: relative;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: -3px;
+      font-size: 1.4rem;
+      color: #0879e8;
+    }
+
+    details[open] summary::after { content: "−"; }
+
+    details p { color: var(--muted); font-size: .9rem; margin: 13px 0 0; }
+
+    /* References and CTA */
+
+    .reference-list { display: grid; gap: 12px; }
+
+    .reference-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: border-color .2s;
+    }
+
+    .reference-link:hover { border-color: #80bdf7; }
+
+    .reference-link span:last-child { color: #0879e8; }
+
+    .cta {
+      padding: 65px 30px;
+      border-radius: 26px;
+      color: #fff;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0, rgba(40,152,243,.25), transparent 55%),
+        linear-gradient(120deg, #071b33, #0c365b);
+    }
+
+    .cta h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 13px; }
+
+    .cta p { color: #c6d8e9; max-width: 610px; margin: 0 auto 25px; }
+
+    /* Footer */
+
+    footer { background: #061629; color: #c5d4e4; }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      padding-block: 52px;
+    }
+
+    .footer-about p { color: #93a8be; max-width: 350px; font-size: .88rem; margin-top: 16px; }
+
+    .footer-column h3 { color: white; font-size: .95rem; margin-bottom: 17px; }
+
+    .footer-column a {
+      display: block;
+      color: #a9bdd1;
+      font-size: .85rem;
+      margin-bottom: 10px;
+    }
+
+    .footer-column a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-block: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: .8rem;
+      color: #91a7bd;
+    }
+
+    .back-top {
+      position: fixed;
+      z-index: 500;
+      right: 22px;
+      bottom: 22px;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 50%;
+      color: #10253e;
+      background: var(--gold);
+      box-shadow: 0 8px 25px rgba(0,0,0,.18);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .2s, transform .2s;
+    }
+
+    .back-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s, transform .6s; }
+
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* Responsive design */
+
+    @media (max-width: 1000px) {
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: .77rem; }
+      .hero-grid { gap: 25px; }
+      .importance-grid, .technology-grid { grid-template-columns: repeat(2, 1fr); }
+      .properties-grid { grid-template-columns: repeat(2, 1fr); }
+      .how-grid { gap: 35px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 32px, var(--max-width)); }
+      .section { padding: 65px 0; }
+      .nav-inner { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 18px 24px 25px;
+        background: #071b33;
+        border-top: 1px solid rgba(255,255,255,.1);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 0; font-size: .92rem; }
+      .hero-grid { grid-template-columns: 1fr; padding-block: 65px 55px; }
+      .hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+      .hero-visual { min-height: 310px; }
+      .solar-illustration { max-width: 330px; }
+      .floating-stat { left: 0; bottom: 0; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .stat { padding: 17px 8px; }
+      .how-grid, .characteristics-grid { grid-template-columns: 1fr; }
+      .graph-grid { grid-template-columns: 1fr; }
+      .application-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .footer-about { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 480px) {
+      .importance-grid, .properties-grid, .technology-grid,
+      .application-grid, .compare-grid { grid-template-columns: 1fr; }
+      .section-heading { margin-bottom: 30px; }
+      .feature-card { padding: 23px; }
+      .diagram-card { padding: 22px; }
+      .graph-card { padding: 15px; }
+      .graph-controls { padding: 17px; }
+      .footer-main { grid-template-columns: 1fr; gap: 28px; }
+      .footer-about { grid-column: auto; }
+      th, td { padding: 12px 10px; font-size: .78rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 
 <body>
-
-<header>
-  <p>PHOTOVOLTAICS · SEMICONDUCTOR PHYSICS · CLEAN ENERGY</p>
-  <h1>Solar Cells: Working Principle, Properties, Characteristics and Applications</h1>
-  <p>
-    Explore the physics of photovoltaic energy conversion, the properties
-    of semiconductor materials, electrical performance parameters,
-    interactive solar-cell graphs and the role of solar energy in a
-    sustainable future.
-  </p>
-</header>
-
-<nav aria-label="Main navigation">
-  <a href="#importance">Importance</a>
-  <a href="#definition">Definition</a>
-  <a href="#principle">Physics</a>
-  <a href="#materials">Materials</a>
-  <a href="#properties">Properties</a>
-  <a href="#characteristics">Characteristics</a>
-  <a href="#graphs">Graphs</a>
-  <a href="#applications">Applications</a>
-  <a href="#references">References</a>
-</nav>
-
-<main>
-
-<section id="importance">
-<h2>1. Importance of Solar Cells</h2>
-
-<p>
-Solar cells are essential components of modern renewable-energy
-systems. They convert solar radiation directly into electricity
-without combustion during operation. Photovoltaic technology can
-contribute to energy security, lower operational emissions and
-electrification in locations connected or not connected to an
-electricity grid.
-</p>
-
-<div class="card-grid">
-  <div class="card">
-    <h3>Renewable energy</h3>
-    Sunlight is a naturally replenished energy resource. Photovoltaic
-    systems help diversify the electricity supply.
-  </div>
-  <div class="card">
-    <h3>Environmental benefits</h3>
-    Electricity generation requires no fuel combustion at the panel.
-    Manufacturing, transport and end-of-life impacts must also be
-    considered in a complete life-cycle assessment.
-  </div>
-  <div class="card">
-    <h3>Energy independence</h3>
-    Rooftop systems and solar farms can reduce dependence on imported
-    fuels and diversify local energy production.
-  </div>
-  <div class="card">
-    <h3>Remote applications</h3>
-    Solar systems can power sensors, telecommunications, lighting,
-    irrigation and equipment in remote areas.
-  </div>
-</div>
-
-<p>
-Solar electricity is variable because irradiance changes with time,
-weather, season and shading. Batteries, grid interconnection and
-complementary energy sources can help balance supply and demand.
-</p>
-</section>
-
-<section id="definition">
-<h2>2. Definition of a Solar Cell</h2>
-
-<p>
-A <strong>solar cell</strong>, also called a
-<strong>photovoltaic cell</strong>, is a semiconductor device that
-converts incident light into electrical energy through the
-photovoltaic effect.
-</p>
-
-<p>
-A solar cell absorbs photons and generates mobile charge carriers.
-An internal electric field or selective electrical contacts help
-separate and collect electrons and holes. When the contacts are
-connected through an external circuit, electrical current can flow
-and deliver power to a load.
-</p>
-
-<div class="note">
-<strong>Energy-conversion sequence:</strong>
-sunlight → photon absorption → electron–hole pair generation →
-charge separation → current through an external circuit.
-</div>
-</section>
-
-<section id="principle">
-<h2>3. Physical Principle and Operation</h2>
-
-<h3>3.1 Photon absorption</h3>
-<p>
-Light consists of photons carrying energy. The energy of a photon is
-related to its frequency and wavelength by:
-</p>
-
-<div class="formula">E = hν = hc / λ</div>
-
-<p>
-Here, h is Planck's constant, ν is frequency, c is the speed of light
-and λ is wavelength. In a semiconductor, photons with sufficient
-energy can excite electrons into higher-energy states, leaving holes
-behind.
-</p>
-
-<h3>3.2 Electron–hole pair generation</h3>
-<p>
-In a simplified band model, a photon can generate an electron–hole
-pair when its energy is at least comparable to the semiconductor
-band gap, Eg. Photons with lower energy generally cannot generate
-carriers across that gap.
-</p>
-
-<div class="formula">Photon energy ≥ semiconductor band-gap energy</div>
-
-<h3>3.3 Charge separation</h3>
-<p>
-A p–n junction or another charge-selective structure helps separate
-electrons and holes. The internal electric field and interfaces
-direct carriers toward their appropriate contacts, reducing the
-chance that they recombine before collection.
-</p>
-
-<h3>3.4 Electrical power generation</h3>
-<p>
-When a load connects the two contacts, the cell supplies current at
-a voltage. The useful electrical power is the product of voltage
-and current.
-</p>
-
-<div class="formula">P = V × I</div>
-
-<h3>3.5 Recombination and energy losses</h3>
-<p>
-Not every incident photon produces a collected carrier. Reflection,
-transmission, thermalization, recombination and resistive losses
-reduce conversion efficiency. Materials engineering and improved
-interfaces can reduce some of these losses.
-</p>
-</section>
-
-<section id="materials">
-<h2>4. Solar-Cell Structure and Materials</h2>
-
-<p>
-A conventional solar cell can contain a light-absorbing
-semiconductor, a junction or selective contacts, a front contact,
-a rear contact and optical coatings. At module level, protective
-glass, encapsulation and interconnections protect and combine cells.
-</p>
-
-<div class="table-scroll">
-<table>
-<thead>
-<tr><th>Component</th><th>Function</th></tr>
-</thead>
-<tbody>
-<tr><td>Absorber layer</td><td>Absorbs photons and generates charge carriers.</td></tr>
-<tr><td>Junction / selective contacts</td><td>Separate and extract electrons and holes.</td></tr>
-<tr><td>Front electrode</td><td>Collects current while allowing light to enter.</td></tr>
-<tr><td>Anti-reflection coating</td><td>Reduces reflection losses.</td></tr>
-<tr><td>Rear electrode</td><td>Provides the second electrical contact.</td></tr>
-<tr><td>Encapsulation</td><td>Protects module components from environmental exposure.</td></tr>
-</tbody>
-</table>
-</div>
-
-<h3>Common absorber materials</h3>
-<ul>
-<li>Crystalline silicon.</li>
-<li>Cadmium telluride (CdTe).</li>
-<li>Copper indium gallium selenide (CIGS).</li>
-<li>Metal-halide perovskites.</li>
-<li>Organic semiconductor materials.</li>
-<li>Multijunction combinations of different absorbers.</li>
-</ul>
-</section>
-
-<section id="properties">
-<h2>5. Important Physical Properties</h2>
-
-<div class="card-grid">
-<div class="card">
-<h3>Band gap</h3>
-Determines the minimum photon energy needed for excitation and
-strongly influences the voltage and spectral response.
-</div>
-<div class="card">
-<h3>Absorption coefficient</h3>
-Describes how strongly a material absorbs light at a particular
-wavelength.
-</div>
-<div class="card">
-<h3>Carrier mobility</h3>
-Describes how readily electrons or holes move under an electric
-field.
-</div>
-<div class="card">
-<h3>Carrier lifetime</h3>
-Indicates how long generated carriers survive before recombination.
-</div>
-<div class="card">
-<h3>Defect density</h3>
-Defects can provide recombination pathways and reduce carrier
-collection.
-</div>
-<div class="card">
-<h3>Stability</h3>
-Thermal, chemical and environmental stability affect device
-reliability and service life.
-</div>
-</div>
-
-<p>
-The best absorber is not determined by one property alone.
-Researchers must consider band gap, optical absorption, carrier
-transport, recombination, contacts, stability, manufacturing cost,
-material availability and environmental impact together.
-</p>
-</section>
-
-<section id="characteristics">
-<h2>6. Electrical Characteristics of Solar Cells</h2>
-
-<h3>6.1 Short-circuit current (Isc)</h3>
-<p>
-The short-circuit current is the current delivered when the
-terminal voltage is zero. It depends strongly on illumination,
-active area, optical absorption and carrier collection.
-</p>
-
-<h3>6.2 Open-circuit voltage (Voc)</h3>
-<p>
-The open-circuit voltage is measured when the external current is
-zero. It depends on the semiconductor, recombination, temperature
-and illumination.
-</p>
-
-<h3>6.3 Maximum power point</h3>
-<p>
-The maximum power point is the operating point where the product
-of current and voltage is greatest.
-</p>
-
-<div class="formula">Pmax = Vmp × Imp</div>
-
-<h3>6.4 Fill factor</h3>
-<p>
-The fill factor measures the quality or rectangularity of the
-current–voltage curve.
-</p>
-
-<div class="formula">FF = Pmax / (Voc × Isc)</div>
-
-<p>
-A fill factor closer to 1 indicates that the maximum output power
-is closer to the product of open-circuit voltage and short-circuit
-current. Resistive losses and recombination can reduce FF.
-</p>
-
-<h3>6.5 Power-conversion efficiency</h3>
-<div class="formula">η = Pmax / Pin × 100%</div>
-
-<p>
-Pin is the optical power incident on the device. Combining the
-definitions gives:
-</p>
-
-<div class="formula">
-η = (Voc × Isc × FF) / Pin × 100%
-</div>
-
-<p>
-For current density Jsc, use incident irradiance and power density
-consistently.
-</p>
-
-<div class="note">
-For common terrestrial photovoltaic measurements, standard test
-conditions typically use 1000 W/m² irradiance, an AM1.5 reference
-spectrum and a cell temperature of 25 °C. Always state measurement
-conditions when comparing solar cells.
-</div>
-
-<h3>6.6 Other characterization parameters</h3>
-<ul>
-<li>External and internal quantum efficiency.</li>
-<li>Series resistance and shunt resistance.</li>
-<li>Temperature coefficients.</li>
-<li>Spectral response.</li>
-<li>Dark and illuminated current–voltage measurements.</li>
-</ul>
-</section>
-
-<section id="graphs">
-<h2>7. Interactive Solar-Cell Characteristics</h2>
-
-<p>
-The following graphs are generated from an illustrative mathematical
-model. They are educational examples, not experimental data for a
-specific solar-cell technology.
-</p>
-
-<label>
-Short-circuit current Isc:
-<span id="iscText">8.0 A</span><br>
-<input id="isc" type="range" min="2" max="12" step="0.5" value="8">
-</label>
-
-<label>
-Open-circuit voltage Voc:
-<span id="vocText">0.65 V</span><br>
-<input id="voc" type="range" min="0.35" max="0.8" step="0.01" value="0.65">
-</label>
-
-<label>
-Curve-shape parameter:
-<span id="nText">10</span><br>
-<input id="n" type="range" min="4" max="20" step="1" value="10">
-</label>
-
-<p><strong>Maximum power:</strong> <span id="powerText">—</span></p>
-
-<h3>Current versus voltage (I–V)</h3>
-<canvas id="iv" aria-label="Illustrative solar cell current voltage graph"></canvas>
-
-<p>
-At zero voltage, the current is approximately Isc. As voltage
-approaches Voc, the current falls toward zero. The bend or knee
-indicates the region where the cell can deliver its maximum power.
-</p>
-
-<h3>Power versus voltage (P–V)</h3>
-<canvas id="pv" aria-label="Illustrative solar cell power voltage graph"></canvas>
-
-<p>
-The P–V curve is calculated using P = V × I. Its peak corresponds
-to the maximum power point, which is important for maximum-power
-point tracking in practical photovoltaic systems.
-</p>
-
-<h3>Worked numerical example</h3>
-<p>
-Suppose a hypothetical cell has Voc = 0.65 V, Isc = 8.0 A and
-FF = 0.75. Its estimated maximum power is:
-</p>
-<div class="formula">Pmax = 0.65 × 8.0 × 0.75 = 3.90 W</div>
-<p>
-If the incident optical power is 20 W, the efficiency is
-3.90 / 20 × 100% = 19.5%. These figures are illustrative only.
-</p>
-</section>
-
-<section id="applications">
-<h2>8. Applications of Solar Cells</h2>
-<div class="card-grid">
-<div class="card"><h3>Residential</h3>Rooftop electricity generation for homes.</div>
-<div class="card"><h3>Industrial</h3>Commercial roofs and large photovoltaic plants.</div>
-<div class="card"><h3>Agriculture</h3>Irrigation pumps, water management and sensors.</div>
-<div class="card"><h3>Remote systems</h3>Telecommunications, lighting and standalone equipment.</div>
-<div class="card"><h3>Space technology</h3>Electrical power for satellites and spacecraft.</div>
-<div class="card"><h3>Emerging research</h3>Tandem photovoltaics, indoor cells and solar-powered hydrogen.</div>
-</div>
-</section>
-
-<section id="limitations">
-<h2>9. Advantages and Limitations</h2>
-<div class="card-grid">
-<div class="card">
-<h3>Advantages</h3>
-<ul>
-<li>No fuel combustion during generation.</li>
-<li>Modular and scalable design.</li>
-<li>Suitable for grid-connected or off-grid systems.</li>
-<li>Can reduce purchased electricity.</li>
-<li>Pairs with battery storage.</li>
-</ul>
-</div>
-<div class="card">
-<h3>Limitations</h3>
-<ul>
-<li>Output varies with sunlight and weather.</li>
-<li>Shading can reduce performance.</li>
-<li>Storage and power electronics may add cost.</li>
-<li>Manufacturing requires materials and energy.</li>
-<li>Recycling and end-of-life management are important.</li>
-</ul>
-</div>
-</div>
-</section>
-
-<section id="references">
-<h2>10. Scientific References and Further Reading</h2>
-<ol>
-<li>
-U.S. Department of Energy:
-<a href="https://www.energy.gov/cmei/systems/solar-photovoltaic-cell-basics">
-Solar Photovoltaic Cell Basics
-</a>.
-</li>
-<li>
-National Renewable Energy Laboratory:
-<a href="https://www.nrel.gov/pv/cell-efficiency.html">
-Best Research-Cell Efficiency Chart
-</a>.
-</li>
-<li>
-National Renewable Energy Laboratory:
-<a href="https://www.nrel.gov/pv/device-performance.html">
-Photovoltaic Device Performance
-</a>.
-</li>
-<li>
-Google Search Central:
-<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">
-Build and Submit a Sitemap
-</a>.
-</li>
-<li>
-Google Search Console:
-<a href="https://support.google.com/webmasters/answer/7474347">
-Troubleshoot Pages Missing from Google Search
-</a>.
-</li>
-</ol>
-<p>
-This page is an educational introduction. For research-grade
-comparisons, use verified experimental data, relevant standards
-and documented measurement conditions.
-</p>
-</section>
-
-</main>
-
-<footer>
-<p>Solar Cells — Photovoltaic Physics and Renewable Energy</p>
-<p>Educational resource · Semiconductor materials · Solar energy</p>
-</footer>
-
-<script>
-const isc = document.getElementById("isc");
-const voc = document.getElementById("voc");
-const n = document.getElementById("n");
-
-function current(v, I, V, shape) {
-  if (v <= 0) return I;
-  if (v >= V) return 0;
-  return I * (1 - Math.pow(v / V, shape));
-}
-
-function graph(canvasId, type, I, V, shape) {
-  const canvas = document.getElementById(canvasId);
-  const rect = canvas.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-
-  canvas.width = Math.max(300, rect.width * dpr);
-  canvas.height = rect.height * dpr;
-
-  const ctx = canvas.getContext("2d");
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  const w = canvas.width / dpr;
-  const h = canvas.height / dpr;
-  const m = {left: 55, right: 15, top: 35, bottom: 45};
-  const pw = w - m.left - m.right;
-  const ph = h - m.top - m.bottom;
-
-  const points = [];
-  let maxP = 0, bestV = 0;
-
-  for (let k = 0; k <= 300; k++) {
-    const v = V * k / 300;
-    const i = current(v, I, V, shape);
-    const p = v * i;
-    points.push({v, i, p});
-    if (p > maxP) {
-      maxP = p;
-      bestV = v;
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="SolarCell Explorer home">
+        <span class="brand-mark">☀</span>
+        <span>SolarCell <span style="color:#ffc52e">Explorer</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰ Menu</button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#importance">Importance</a>
+        <a href="#how-it-works">Science</a>
+        <a href="#properties">Properties</a>
+        <a href="#characteristics">Characteristics</a>
+        <a href="#graphs">Graphs</a>
+        <a href="#applications">Applications</a>
+        <a href="#references">References</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Clean energy · Sustainable future</div>
+          <h1>Turn sunlight into <span>possibility.</span></h1>
+          <p class="hero-copy">
+            Discover the science behind solar cells: semiconductor physics,
+            photovoltaic conversion, electrical performance, and the technologies
+            powering a cleaner energy future.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#how-it-works">Explore the science <span>→</span></a>
+            <a class="btn btn-outline" href="#graphs">View interactive graphs ↗</a>
+          </div>
+
+          <div class="hero-points">
+            <span><b>✓</b> Renewable electricity</span>
+            <span><b>✓</b> Semiconductor technology</span>
+            <span><b>✓</b> Interactive learning</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustration of a photovoltaic solar panel">
+          <div class="sun-orbit"></div>
+          <div class="solar-illustration">
+            <svg viewBox="0 0 460 410" role="img" aria-label="Blue photovoltaic panel illuminated by sunlight">
+              <defs>
+                <linearGradient id="panelSurface" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#48b6ff"/>
+                  <stop offset="48%" stop-color="#0753a5"/>
+                  <stop offset="100%" stop-color="#061c42"/>
+                </linearGradient>
+                <linearGradient id="panelFrame" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f4fbff"/>
+                  <stop offset="100%" stop-color="#6687a8"/>
+                </linearGradient>
+                <radialGradient id="sunGlow">
+                  <stop offset="0%" stop-color="#fff6be" stop-opacity=".95"/>
+                  <stop offset="100%" stop-color="#ffc52e" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="7"/>
+                </filter>
+              </defs>
+
+              <circle cx="345" cy="74" r="88" fill="url(#sunGlow)"/>
+              <g stroke="#ffd75c" stroke-width="3" stroke-linecap="round" opacity=".9">
+                <path d="M345 14V0 M345 148v-14 M285 74h-14 M419 74h-14 M303 32l-10-10 M397 126l-10-10 M303 116l-10 10 M397 22l-10 10"/>
+              </g>
+              <circle cx="345" cy="74" r="27" fill="#ffd65a"/>
+
+              <g transform="translate(34 92) rotate(-12 190 130)">
+                <path d="M40 62 L300 15 L396 235 L136 282 Z" fill="#021329" opacity=".65"/>
+                <path d="M23 45 L284 0 L380 218 L119 264 Z" fill="url(#panelFrame)" stroke="#c8e3f7" stroke-width="3"/>
+                <path d="M34 52 L279 10 L368 214 L123 255 Z" fill="url(#panelSurface)" stroke="#a9d8fa" stroke-width="1.5"/>
+
+                <g stroke="#a9d8fa" stroke-width="1.3" opacity=".8">
+                  <path d="M83 44 L167 247 M132 36 L216 239 M181 27 L265 230 M230 19 L314 222"/>
+                  <path d="M44 78 L322 30 M55 108 L335 59 M68 139 L348 90 M81 169 L361 120 M94 199 L374 151 M107 229 L355 194"/>
+                </g>
+                <path d="M35 52 L279 10 L222 101 Z" fill="#d6f4ff" opacity=".13"/>
+              </g>
+
+              <g stroke="#ffc52e" stroke-width="2" opacity=".6">
+                <path d="M314 111L272 173"/>
+                <path d="M349 119L328 175"/>
+                <path d="M379 108L366 155"/>
+              </g>
+
+              <g transform="translate(20 343)">
+                <rect width="182" height="42" rx="12" fill="#0c3459" stroke="#5d9dce" stroke-opacity=".6"/>
+                <circle cx="20" cy="21" r="5" fill="#ffc52e"/>
+                <text x="34" y="18" fill="#fff" font-size="11" font-family="DM Sans">PHOTOVOLTAIC</text>
+                <text x="34" y="31" fill="#9cc9ed" font-size="10" font-family="DM Sans">Solar energy conversion</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="floating-stat">
+            <strong>Sunlight → Electricity</strong>
+            <span>Clean energy through the photovoltaic effect</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATISTICS -->
+    <div class="stats-wrap">
+      <div class="container stats-grid">
+        <div class="stat">
+          <strong>PV</strong>
+          <span>Photovoltaic conversion</span>
+        </div>
+        <div class="stat">
+          <strong>25+ years</strong>
+          <span>Typical module service life</span>
+        </div>
+        <div class="stat">
+          <strong>DC</strong>
+          <span>Direct-current output</span>
+        </div>
+        <div class="stat">
+          <strong>0 fuel</strong>
+          <span>Required during operation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPORTANCE -->
+    <section class="section section-white" id="importance">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Why solar cells matter</div>
+          <h2>A smarter way to power our world.</h2>
+          <p>
+            Solar cells convert an abundant natural resource into useful electricity.
+            They can support energy security, reduce operational emissions, and
+            expand access to electricity.
+          </p>
+        </div>
+
+        <div class="importance-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">☀</div>
+            <h3>Clean Energy</h3>
+            <p>Generate electricity without direct combustion emissions while the system operates.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">↗</div>
+            <h3>Lower Running Costs</h3>
+            <p>Reduce grid electricity purchases when the system produces power and energy is used effectively.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">⌂</div>
+            <h3>Energy Independence</h3>
+            <p>Generate electricity locally and combine solar panels with batteries or other energy sources.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">♻</div>
+            <h3>Sustainable Future</h3>
+            <p>Support the transition to low-carbon energy, with responsible manufacturing and recycling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCIENCE -->
+    <section class="section" id="how-it-works">
+      <div class="container how-grid">
+        <div class="diagram-card reveal">
+          <div class="eyebrow">Inside a solar cell</div>
+          <h3>How light becomes electricity</h3>
+          <p>A simplified representation of charge generation and separation in a semiconductor junction.</p>
+
+          <svg class="band-diagram" viewBox="0 0 420 270" role="img" aria-label="Simplified solar cell diagram showing photons, electron and hole movement">
+            <defs>
+              <linearGradient id="semi" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#0c6fc0"/>
+                <stop offset="50%" stop-color="#2badd5"/>
+                <stop offset="100%" stop-color="#0b5b9f"/>
+              </linearGradient>
+              <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#63d7ff"/>
+              </marker>
+              <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#ffd15b"/>
+              </marker>
+            </defs>
+            <rect x="30" y="95" width="360" height="120" rx="9" fill="url(#semi)" stroke="#83d5f5" stroke-width="2"/>
+            <rect x="30" y="95" width="360" height="43" rx="7" fill="#7dd9ff" opacity=".27"/>
+            <path d="M30 138H390" stroke="#c3f2ff" stroke-width="2" stroke-dasharray="6 5"/>
+            <text x="210" y="121" fill="#fff" font-size="15" text-anchor="middle" font-weight="700">n-type semiconductor</text>
+            <text x="210" y="181" fill="#fff" font-size="15" text-anchor="middle" font-weight="700">p-type semiconductor</text>
+            <text x="210" y="235" fill="#a9c9e4" font-size="11" text-anchor="middle">p–n junction / internal electric field</text>
+
+            <g stroke="#ffd15b" stroke-width="2.5" marker-end="url(#arrowGold)">
+              <path d="M90 20L90 78"/>
+              <path d="M165 20L165 78"/>
+              <path d="M240 20L240 78"/>
+            </g>
+            <g fill="#ffd15b" font-size="12">
+              <text x="90" y="12" text-anchor="middle">Photon</text>
+              <text x="165" y="12" text-anchor="middle">Photon</text>
+              <text x="240" y="12" text-anchor="middle">Photon</text>
+            </g>
+            <g stroke="#63d7ff" stroke-width="2.5" marker-end="url(#arrowBlue)">
+              <path d="M130 160L130 105"/>
+              <path d="M250 170L250 113"/>
+            </g>
+            <g fill="#fff">
+              <circle cx="130" cy="160" r="8" fill="#ffd15b"/>
+              <text x="130" y="164" text-anchor="middle" font-size="11" fill="#092744">−</text>
+              <circle cx="250" cy="170" r="8" fill="#f5a4ff"/>
+              <text x="250" y="174" text-anchor="middle" font-size="11" fill="#092744">+</text>
+            </g>
+            <text x="300" y="77" fill="#b5e9ff" font-size="11">Electrons</text>
+            <text x="300" y="91" fill="#b5e9ff" font-size="11">and holes</text>
+          </svg>
+
+          <p style="font-size:.8rem;margin-bottom:0">Conceptual illustration; actual device structures depend on the cell technology.</p>
+        </div>
+
+        <div class="reveal">
+          <div class="eyebrow">The photovoltaic effect</div>
+          <h2 style="font-size:clamp(2rem,4vw,2.7rem)">From photons to useful electrical power.</h2>
+          <p style="color:var(--muted)">
+            A solar cell is a semiconductor device that converts incident light into
+            electrical energy. When suitable photons are absorbed, they can create
+            electron–hole pairs. The device structure separates these charges and
+            allows current to flow through an external circuit.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">01</div>
+              <div>
+                <h3>Light absorption</h3>
+                <p>Photons with sufficient energy are absorbed by the semiconductor, exciting electrons across its band gap.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">02</div>
+              <div>
+                <h3>Charge separation</h3>
+                <p>An internal electric field or selective contacts help separate electrons and holes before they recombine.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">03</div>
+              <div>
+                <h3>Current and voltage</h3>
+                <p>Contacts collect the charges. A connected circuit allows current to flow and delivers electrical power to a load.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROPERTIES -->
+    <section class="section properties" id="properties">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Materials and device physics</div>
+          <h2>Essential properties of solar cells.</h2>
+          <p>
+            Material composition, the band gap, charge transport, interfaces, and
+            device design all influence how efficiently a solar cell converts light.
+          </p>
+        </div>
+
+        <div class="properties-grid">
+          <article class="property-card reveal">
+            <div class="symbol">◈</div>
+            <h3>Semiconductor Material</h3>
+            <p>Silicon, CdTe, CIGS, and perovskite absorbers have different electronic and optical properties.</p>
+          </article>
+
+          <article class="property-card reveal">
+            <div class="symbol">λ</div>
+            <h3>Band Gap</h3>
+            <p>The band gap influences which photon energies can be absorbed and the voltage a cell can deliver.</p>
+          </article>
+
+          <article class="property-card reveal">
+            <div class="symbol">↯</div>
+            <h3>Light Absorption</h3>
+            <p>Absorption depends on the material's optical properties, thickness, and the spectrum of incident light.</p>
+          </article>
+
+          <article class="property-card reveal">
+            <div class="symbol">⇄</div>
+            <h3>Charge Transport</h3>
+            <p>Carrier mobility, lifetime, recombination, and contact selectivity affect collection of photogenerated charges.</p>
+          </article>
+
+          <article class="property-card reveal">
+            <div class="symbol">◉</div>
+            <h3>Thermal Stability</h3>
+            <p>Temperature affects voltage, efficiency, and long-term material stability; most silicon cells lose voltage as they heat up.</p>
+          </article>
+
+          <article class="property-card reveal">
+            <div class="symbol">⌁</div>
+            <h3>Durability</h3>
+            <p>Encapsulation, moisture resistance, UV exposure, and mechanical strength influence module service life.</p>
+          </article>
+        </div>
+
+        <div class="formula-panel reveal">
+          <h3>Solar cell conversion efficiency</h3>
+          <div class="formula">η = (P<sub>max</sub> / P<sub>in</sub>) × 100%</div>
+          <p>
+            η = conversion efficiency · P<sub>max</sub> = maximum electrical output power ·
+            P<sub>in</sub> = incident optical power on the cell
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARACTERISTICS -->
+    <section class="section section-white" id="characteristics">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Measure the performance</div>
+          <h2>Electrical characteristics explained.</h2>
+          <p>
+            The current–voltage curve reveals how a solar cell behaves under
+            illumination. Its key parameters help researchers compare devices
+            and identify performance losses.
+          </p>
+        </div>
+
+        <div class="characteristics-grid">
+          <div class="reveal">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Short-circuit current (I<sub>sc</sub>)</td>
+                    <td>Current at zero terminal voltage.</td>
+                  </tr>
+                  <tr>
+                    <td>Open-circuit voltage (V<sub>oc</sub>)</td>
+                    <td>Voltage at zero output current.</td>
+                  </tr>
+                  <tr>
+                    <td>Maximum power (P<sub>max</sub>)</td>
+                    <td>Highest product of current and voltage.</td>
+                  </tr>
+                  <tr>
+                    <td>Fill factor (FF)</td>
+                    <td>Ratio of maximum power to I<sub>sc</sub>V<sub>oc</sub>.</td>
+                  </tr>
+                  <tr>
+                    <td>Efficiency (η)</td>
+                    <td>Electrical output divided by incident light power.</td>
+                  </tr>
+                  <tr>
+                    <td>Temperature coefficient</td>
+                    <td>Change in a performance parameter per degree.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note">Exact values depend on technology, cell design, temperature, and measurement conditions.</p>
+          </div>
+
+          <div class="reveal">
+            <h3 style="font-size:1.3rem">The equations behind performance</h3>
+            <p style="color:var(--muted);font-size:.9rem">
+              Electrical power is the product of terminal voltage and current.
+              At the maximum power point, this product is at its highest value.
+            </p>
+
+            <div class="metric-grid">
+              <div class="metric">
+                <span>Electrical power</span>
+                <strong>P = V × I</strong>
+              </div>
+              <div class="metric">
+                <span>Maximum power</span>
+                <strong>P<sub>max</sub> = V<sub>mp</sub>I<sub>mp</sub></strong>
+              </div>
+              <div class="metric">
+                <span>Fill factor</span>
+                <strong>FF = P<sub>max</sub>/(V<sub>oc</sub>I<sub>sc</sub>)</strong>
+              </div>
+              <div class="metric">
+                <span>Efficiency</span>
+                <strong>η = P<sub>max</sub>/P<sub>in</sub></strong>
+              </div>
+            </div>
+
+            <div class="graph-explanation">
+              <strong>Remember:</strong> a higher short-circuit current or open-circuit
+              voltage alone does not necessarily mean higher efficiency. The maximum
+              power point, incident optical power, and measurement conditions matter.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRAPHS -->
+    <section class="section graphs-section" id="graphs">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Interactive laboratory</div>
+          <h2>Explore the I–V and P–V curves.</h2>
+          <p>
+            Adjust the simulated irradiance and observe how the current–voltage
+            and power–voltage curves change. These curves are illustrative models,
+            not measured experimental data.
+          </p>
+        </div>
+
+        <div class="graph-controls reveal">
+          <div class="slider-control">
+            <div class="slider-label">
+              <label for="irradiance">Incident irradiance</label>
+              <output id="irradianceValue" for="irradiance">1000 W/m²</output>
+            </div>
+            <input id="irradiance" type="range" min="200" max="1200" step="50" value="1000">
+            <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:.75rem">
+              <span>200 W/m²</span><span>1200 W/m²</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="resetGraphs" type="button">Reset simulation ↺</button>
+        </div>
+
+        <div class="graph-grid">
+          <article class="graph-card reveal">
+            <h3>I–V Curve</h3>
+            <p>Current as a function of terminal voltage.</p>
+            <div class="chart-wrap">
+              <canvas id="ivChart" width="600" height="370" role="img" aria-label="Simulated current versus voltage graph"></canvas>
+            </div>
+            <div class="legend">
+              <span><i style="background:#0879e8"></i> Current–voltage</span>
+              <span><i style="background:#f59e0b"></i> Maximum power point</span>
+            </div>
+          </article>
+
+          <article class="graph-card reveal">
+            <h3>P–V Curve</h3>
+            <p>Electrical output power as a function of voltage.</p>
+            <div class="chart-wrap">
+              <canvas id="pvChart" width="600" height="370" role="img" aria-label="Simulated power versus voltage graph"></canvas>
+            </div>
+            <div class="legend">
+              <span><i style="background:#0d9b77"></i> Power–voltage</span>
+              <span><i style="background:#f59e0b"></i> Maximum power point</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="metric-grid reveal" style="margin-top:22px">
+          <div class="metric">
+            <span>Simulated short-circuit current</span>
+            <strong id="simIsc">8.00 A</strong>
+          </div>
+          <div class="metric">
+            <span>Simulated open-circuit voltage</span>
+            <strong id="simVoc">0.65 V</strong>
+          </div>
+          <div class="metric">
+            <span>Simulated maximum power</span>
+            <strong id="simPmax">4.15 W</strong>
+          </div>
+          <div class="metric">
+            <span>Simulated maximum-power voltage</span>
+            <strong id="simVmp">0.52 V</strong>
+          </div>
+        </div>
+
+        <div class="graph-explanation reveal">
+          <strong>How to read the graphs:</strong>
+          I<sub>sc</sub> is found at V = 0, while V<sub>oc</sub> is found where
+          current reaches zero. Electrical power equals V × I. The peak of the
+          P–V curve identifies the maximum power point (MPP). Increasing irradiance
+          generally increases photocurrent substantially; voltage also changes,
+          usually less strongly.
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGIES -->
+    <section class="section section-white" id="technologies">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Photovoltaic technologies</div>
+          <h2>Different materials, different possibilities.</h2>
+          <p>
+            Solar cell technologies differ in their material composition,
+            manufacturing processes, efficiency potential, cost, flexibility,
+            and stability.
+          </p>
+        </div>
+
+        <div class="technology-grid">
+          <article class="tech-card reveal">
+            <div class="tech-art">
+              <svg viewBox="0 0 120 105" role="img" aria-label="Monocrystalline solar panel illustration">
+                <g transform="translate(20 14) skewY(-12)">
+                  <rect width="82" height="72" rx="4" fill="#073568" stroke="#a4c7ed" stroke-width="3"/>
+                  <g stroke="#5ca7f0" stroke-width="1.3">
+                    <path d="M20 0V72 M41 0V72 M62 0V72 M0 18H82 M0 36H82 M0 54H82"/>
+                  </g>
+                  <path d="M3 3H78L50 22H3Z" fill="#fff" opacity=".12"/>
+                </g>
+              </svg>
+            </div>
+            <div class="tech-content">
+              <h3>Monocrystalline Silicon</h3>
+              <p>Widely used crystalline-silicon technology with strong commercial performance and a mature supply chain.</p>
+              <span class="tag">Established technology</span>
+            </div>
+          </article>
+
+          <article class="tech-card reveal">
+            <div class="tech-art">
+              <svg viewBox="0 0 120 105" role="img" aria-label="Polycrystalline solar panel illustration">
+                <g transform="translate(20 14) skewY(-12)">
+                  <rect width="82" height="72" rx="4" fill="#155b98" stroke="#a4c7ed" stroke-width="3"/>
+                  <g stroke="#9bc9f0" stroke-width="1.4">
+                    <path d="M20 0V72 M41 0V72 M62 0V72 M0 18H82 M0 36H82 M0 54H82"/>
+                  </g>
+                  <g fill="#7dc1ed" opacity=".24">
+                    <path d="M0 0H41V36H0Z M41 36H82V72H41Z"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="tech-content">
+              <h3>Polycrystalline Silicon</h3>
+              <p>Silicon cells made from multiple crystalline grains; their commercial role has changed as manufacturing costs evolved.</p>
+              <span class="tag">Crystalline silicon</span>
+            </div>
+          </article>
+
+          <article class="tech-card reveal">
+            <div class="tech-art">
+              <svg viewBox="0 0 120 105" role="img" aria-label="Thin film solar module illustration">
+                <path d="M15 31L93 16L106 72L28 87Z" fill="#243c5b" stroke="#96b6d9" stroke-width="3"/>
+                <path d="M22 34L89 21L98 68L31 81Z" fill="#126f91"/>
+                <g stroke="#7bd5e5" stroke-width="1.4">
+                  <path d="M45 30L54 77 M67 26L76 72 M25 47L93 34 M28 64L96 51"/>
+                </g>
+              </svg>
+            </div>
+            <div class="tech-content">
+              <h3>Thin-Film Solar Cells</h3>
+              <p>Use thin absorber layers such as CdTe or CIGS and can be manufactured for particular lightweight or building-integrated designs.</p>
+              <span class="tag">Thin-film materials</span>
+            </div>
+          </article>
+
+          <article class="tech-card reveal">
+            <div class="tech-art">
+              <svg viewBox="0 0 120 105" role="img" aria-label="Perovskite solar cell illustration">
+                <defs>
+                  <linearGradient id="perovskite" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#33d5c6"/>
+                    <stop offset="50%" stop-color="#8565d9"/>
+                    <stop offset="100%" stop-color="#ed7fa8"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(20 15) skewY(-12)">
+                  <rect width="82" height="72" rx="4" fill="url(#perovskite)" stroke="#fff" stroke-width="2"/>
+                  <g stroke="#fff" stroke-width="1.1" opacity=".7">
+                    <path d="M20 0V72 M41 0V72 M62 0V72 M0 18H82 M0 36H82 M0 54H82"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="tech-content">
+              <h3>Perovskite Solar Cells</h3>
+              <p>An active research area with attractive optical properties and potential for lightweight and tandem architectures.</p>
+              <span class="tag">Emerging technology</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section class="section" id="applications">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Where solar energy is used</div>
+          <h2>From rooftops to remote locations.</h2>
+          <p>Photovoltaic systems can be designed for many applications, from small electronic devices to utility-scale power stations.</p>
+        </div>
+
+        <div class="application-grid">
+          <article class="application-card reveal">
+            <div class="app-icon">⌂</div>
+            <h3>Residential Systems</h3>
+            <p>Generate electricity for houses, reduce grid consumption, and potentially charge home batteries.</p>
+          </article>
+
+          <article class="application-card reveal">
+            <div class="app-icon">▦</div>
+            <h3>Commercial Buildings</h3>
+            <p>Supply part of the electricity demand of offices, factories, warehouses, and public buildings.</p>
+          </article>
+
+          <article class="application-card reveal">
+            <div class="app-icon">ϟ</div>
+            <h3>Electric Mobility</h3>
+            <p>Provide electricity for charging infrastructure and support cleaner transport when integrated with the grid.</p>
+          </article>
+
+          <article class="application-card reveal">
+            <div class="app-icon">✧</div>
+            <h3>Space Applications</h3>
+            <p>Power satellites and spacecraft using photovoltaic arrays designed for the space environment.</p>
+          </article>
+
+          <article class="application-card reveal">
+            <div class="app-icon">⌁</div>
+            <h3>Agriculture & Water</h3>
+            <p>Operate irrigation pumps, remote monitoring systems, and certain water-treatment installations.</p>
+          </article>
+
+          <article class="application-card reveal">
+            <div class="app-icon">▣</div>
+            <h3>Remote Electronics</h3>
+            <p>Power sensors, outdoor lighting, telecommunications equipment, and off-grid devices.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROS AND CONS -->
+    <section class="section section-white" id="pros-cons">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">A balanced perspective</div>
+          <h2>Benefits and challenges.</h2>
+          <p>Understanding both the advantages and limitations helps determine where photovoltaic systems work best.</p>
+        </div>
+
+        <div class="compare-grid">
+          <article class="compare-card reveal">
+            <h3>Advantages</h3>
+            <ul>
+              <li><span class="check">✓</span><span>Renewable energy source.</span></li>
+              <li><span class="check">✓</span><span>No direct combustion emissions during electricity generation.</span></li>
+              <li><span class="check">✓</span><span>Modular systems, from small devices to large power plants.</span></li>
+              <li><span class="check">✓</span><span>Low routine maintenance for many installations.</span></li>
+              <li><span class="check">✓</span><span>Can be combined with storage and other power sources.</span></li>
+            </ul>
+          </article>
+
+          <article class="compare-card reveal">
+            <h3>Challenges</h3>
+            <ul>
+              <li><span class="cross">!</span><span>Output varies with sunlight, weather, and time of day.</span></li>
+              <li><span class="cross">!</span><span>Energy storage or complementary supply may be needed.</span></li>
+              <li><span class="cross">!</span><span>Heat generally reduces the voltage of conventional silicon cells.</span></li>
+              <li><span class="cross">!</span><span>Manufacturing requires materials, energy, and industrial processes.</span></li>
+              <li><span class="cross">!</span><span>End-of-life collection and recycling need proper infrastructure.</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Quick answers</div>
+          <h2>Frequently asked questions.</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <details>
+            <summary>What is a solar cell?</summary>
+            <p>A solar cell is a semiconductor device that converts light into electrical energy through the photovoltaic effect.</p>
+          </details>
+
+          <details>
+            <summary>What is the difference between a solar cell and a solar panel?</summary>
+            <p>A solar cell is an individual photovoltaic device. A solar panel or module connects multiple cells and packages them for practical use.</p>
+          </details>
+
+          <details>
+            <summary>Why does a solar cell produce less voltage when it gets hotter?</summary>
+            <p>For conventional silicon cells, increasing temperature generally increases the saturation current and reduces open-circuit voltage. The resulting power loss depends on the cell's temperature coefficients and operating conditions.</p>
+          </details>
+
+          <details>
+            <summary>What do the I–V and P–V curves show?</summary>
+            <p>The I–V curve shows current as a function of voltage. The P–V curve shows output power as a function of voltage and helps identify the maximum power point.</p>
+          </details>
+
+          <details>
+            <summary>What is the maximum power point?</summary>
+            <p>It is the operating point at which the product of current and voltage is greatest under a given set of conditions. Maximum power point tracking (MPPT) electronics help a system operate near this point.</p>
+          </details>
+
+          <details>
+            <summary>Can solar panels work on cloudy days?</summary>
+            <p>Yes. They can produce electricity from diffuse sunlight, but their output is usually lower than under strong direct sunlight.</p>
+          </details>
+
+          <details>
+            <summary>Are the graphs on this website experimental measurements?</summary>
+            <p>No. They are generated from a simplified illustrative model for learning purposes. Real measurements depend on the cell technology, irradiance, temperature, device area, and test equipment.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- REFERENCES -->
+    <section class="section section-white" id="references">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Learn more</div>
+          <h2>Scientific references and resources.</h2>
+          <p>Use these reputable resources to explore photovoltaic science, performance measurement, and renewable energy in greater depth.</p>
+        </div>
+
+        <div class="reference-list reveal">
+          <a class="reference-link" href="https://www.nrel.gov/pv/" target="_blank" rel="noopener noreferrer">
+            <span>National Renewable Energy Laboratory — Photovoltaics</span><span>↗</span>
+          </a>
+          <a class="reference-link" href="https://www.energy.gov/eere/solar/solar-energy-technologies-office" target="_blank" rel="noopener noreferrer">
+            <span>U.S. Department of Energy — Solar Energy Technologies Office</span><span>↗</span>
+          </a>
+          <a class="reference-link" href="https://www.iea-pvps.org/" target="_blank" rel="noopener noreferrer">
+            <span>International Energy Agency — Photovoltaic Power Systems</span><span>↗</span>
+          </a>
+          <a class="reference-link" href="https://www.pveducation.org/" target="_blank" rel="noopener noreferrer">
+            <span>PV Education — Photovoltaic device physics and equations</span><span>↗</span>
+          </a>
+          <a class="reference-link" href="https://www.nrel.gov/pv/cell-efficiency.html" target="_blank" rel="noopener noreferrer">
+            <span>NREL — Best Research-Cell Efficiency Chart</span><span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cta reveal">
+          <div class="eyebrow" style="color:#b9ddff;justify-content:center">Knowledge powers innovation</div>
+          <h2>Keep exploring solar science.</h2>
+          <p>
+            Continue learning about semiconductor materials, photovoltaic device
+            engineering, energy conversion, and the technologies shaping a
+            sustainable future.
+          </p>
+          <a class="btn btn-primary" href="#home">Back to the beginning ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-main">
+      <div class="footer-about">
+        <a class="brand" href="#home">
+          <span class="brand-mark">☀</span>
+          <span>SolarCell <span style="color:#ffc52e">Explorer</span></span>
+        </a>
+        <p>
+          An educational resource dedicated to understanding solar cells,
+          photovoltaic physics, device performance, and clean energy technologies.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Explore</h3>
+        <a href="#importance">Importance of solar cells</a>
+        <a href="#how-it-works">Photovoltaic effect</a>
+        <a href="#properties">Material properties</a>
+        <a href="#characteristics">Electrical characteristics</a>
+        <a href="#graphs">Interactive graphs</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Discover</h3>
+        <a href="#technologies">Solar technologies</a>
+        <a href="#applications">Applications</a>
+        <a href="#pros-cons">Benefits and challenges</a>
+        <a href="#faq">Frequently asked questions</a>
+        <a href="#references">Scientific resources</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> SolarCell Explorer. Educational content.</span>
+      <span>Clean energy · Bright future · Better understanding</span>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <script>
+    /* -----------------------------------------
+       MOBILE NAVIGATION
+    ----------------------------------------- */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.textContent = open ? "✕ Close" : "☰ Menu";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰ Menu";
+      });
+    });
+
+    /* -----------------------------------------
+       FOOTER YEAR AND BACK-TO-TOP BUTTON
+    ----------------------------------------- */
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const backTop = document.getElementById("backTop");
+
+    window.addEventListener("scroll", () => {
+      backTop.classList.toggle("visible", window.scrollY > 500);
+    }, { passive: true });
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* -----------------------------------------
+       REVEAL SECTIONS WHEN SCROLLING
+    ----------------------------------------- */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      revealElements.forEach(element => revealObserver.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add("in-view"));
     }
-  }
 
-  const ymax = type === "iv" ? I * 1.12 : maxP * 1.2;
-  const xmax = V * 1.08;
-  const X = v => m.left + v / xmax * pw;
-  const Y = y => m.top + ph - y / ymax * ph;
+    /* -----------------------------------------
+       INTERACTIVE SOLAR CELL MODEL
 
-  ctx.clearRect(0, 0, w, h);
-  ctx.font = "12px Arial";
-  ctx.strokeStyle = "#e0e8f0";
-  ctx.fillStyle = "#526579";
+       This is an illustrative single-diode-like
+       approximation for educational visualization,
+       not a calibrated physical device model.
+    ----------------------------------------- */
 
-  for (let k = 0; k <= 5; k++) {
-    const x = xmax * k / 5;
-    ctx.beginPath();
-    ctx.moveTo(X(x), m.top);
-    ctx.lineTo(X(x), m.top + ph);
-    ctx.stroke();
-    ctx.textAlign = "center";
-    ctx.fillText(x.toFixed(2), X(x), m.top + ph + 20);
-  }
+    const irradianceSlider = document.getElementById("irradiance");
+    const irradianceValue = document.getElementById("irradianceValue");
+    const ivCanvas = document.getElementById("ivChart");
+    const pvCanvas = document.getElementById("pvChart");
+    const ivContext = ivCanvas.getContext("2d");
+    const pvContext = pvCanvas.getContext("2d");
 
-  for (let k = 0; k <= 4; k++) {
-    const y = ymax * k / 4;
-    ctx.beginPath();
-    ctx.moveTo(m.left, Y(y));
-    ctx.lineTo(m.left + pw, Y(y));
-    ctx.stroke();
-    ctx.textAlign = "right";
-    ctx.fillText(y.toFixed(1), m.left - 8, Y(y) + 4);
-  }
+    const model = {
+      referenceIrradiance: 1000,
+      referenceIsc: 8,
+      referenceVoc: 0.65
+    };
 
-  ctx.strokeStyle = "#526579";
-  ctx.beginPath();
-  ctx.moveTo(m.left, m.top);
-  ctx.lineTo(m.left, m.top + ph);
-  ctx.lineTo(m.left + pw, m.top + ph);
-  ctx.stroke();
+    const graphColors = {
+      blue: "#0879e8",
+      green: "#0d9b77",
+      gold: "#f59e0b",
+      grid: "#e5edf6",
+      text: "#61748a",
+      ink: "#17324e"
+    };
 
-  ctx.fillStyle = "#102a43";
-  ctx.font = "bold 13px Arial";
-  ctx.textAlign = "center";
-  ctx.fillText(
-    type === "iv" ? "Current–Voltage Characteristic" :
-                    "Power–Voltage Characteristic",
-    w / 2, 19
-  );
+    function calculateSolarCell(irradiance) {
+      const ratio = irradiance / model.referenceIrradiance;
 
-  ctx.font = "12px Arial";
-  ctx.fillText("Voltage (V)", m.left + pw / 2, h - 7);
+      // Approximate current scaling with irradiance.
+      const isc = model.referenceIsc * ratio;
 
-  ctx.save();
-  ctx.translate(15, m.top + ph / 2);
-  ctx.rotate(-Math.PI / 2);
-  ctx.fillText(type === "iv" ? "Current (A)" : "Power (W)", 0, 0);
-  ctx.restore();
+      // Approximate logarithmic increase in voltage with irradiance.
+      const voc = model.referenceVoc + 0.045 * Math.log(Math.max(ratio, 0.001));
 
-  ctx.strokeStyle = "#1677bd";
-  ctx.lineWidth = 3;
-  ctx.beginPath();
+      const safeVoc = Math.max(voc, 0.1);
+      const points = [];
+      let maximumPower = 0;
+      let maximumVoltage = 0;
+      let maximumCurrent = 0;
 
-  points.forEach((p, k) => {
-    const x = X(p.v);
-    const y = Y(type === "iv" ? p.i : p.p);
-    if (k === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-  ctx.stroke();
+      // Shape parameter gives a rounded knee in the I–V curve.
+      const shape = 13;
 
-  const bestI = current(bestV, I, V, shape);
-  const bx = X(bestV);
-  const by = Y(type === "iv" ? bestI : maxP);
+      for (let i = 0; i <= 200; i++) {
+        const voltage = safeVoc * i / 200;
+        const normalizedVoltage = voltage / safeVoc;
 
-  ctx.fillStyle = "#ffc857";
-  ctx.beginPath();
-  ctx.arc(bx, by, 5, 0, 2 * Math.PI);
-  ctx.fill();
+        let current = isc * (1 - Math.pow(normalizedVoltage, shape));
+        current = Math.max(0, current);
 
-  ctx.fillStyle = "#102a43";
-  ctx.textAlign = "left";
-  ctx.fillText(
-    type === "iv" ? "Maximum power point" : "Pmax = " + maxP.toFixed(2) + " W",
-    Math.min(bx + 8, w - 145),
-    Math.max(by - 10, 45)
-  );
+        const power = voltage * current;
+        points.push({ voltage, current, power });
 
-  return {maxP, bestV, bestI};
-}
+        if (power > maximumPower) {
+          maximumPower = power;
+          maximumVoltage = voltage;
+          maximumCurrent = current;
+        }
+      }
 
-function update() {
-  const I = Number(isc.value);
-  const V = Number(voc.value);
-  const shape = Number(n.value);
+      return {
+        isc,
+        voc: safeVoc,
+        points,
+        pmax: maximumPower,
+        vmp: maximumVoltage,
+        imp: maximumCurrent
+      };
+    }
 
-  document.getElementById("iscText").textContent = I.toFixed(1) + " A";
-  document.getElementById("vocText").textContent = V.toFixed(2) + " V";
-  document.getElementById("nText").textContent = shape;
+    function prepareCanvas(canvas, context) {
+      const dpr = window.devicePixelRatio || 1;
+      const cssWidth = Math.max(280, canvas.getBoundingClientRect().width);
+      const cssHeight = cssWidth * 0.62;
 
-  const result = graph("iv", "iv", I, V, shape);
-  graph("pv", "pv", I, V, shape);
+      canvas.style.height = cssHeight + "px";
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
 
-  document.getElementById("powerText").textContent =
-    result.maxP.toFixed(2) + " W at " +
-    result.bestV.toFixed(2) + " V";
-}
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-[isc, voc, n].forEach(el => el.addEventListener("input", update));
-window.addEventListener("resize", update);
-update();
-</script>
+      return { width: cssWidth, height: cssHeight };
+    }
 
+    function drawChart(context, canvas, config) {
+      const dimensions = prepareCanvas(canvas, context);
+      const width = dimensions.width;
+      const height = dimensions.height;
+
+      const margin = { top: 20, right: 18, bottom: 52, left: 58 };
+      const plotWidth = width - margin.left - margin.right;
+      const plotHeight = height - margin.top - margin.bottom;
+
+      context.clearRect(0, 0, width, height);
+      context.font = "12px DM Sans, sans-serif";
+      context.lineWidth = 1;
+
+      const xScale = value =>
+        margin.left + (value / config.xMax) * plotWidth;
+
+      const yScale = value =>
+        margin.top + plotHeight - (value / config.yMax) * plotHeight;
+
+      // Horizontal grid lines and y-axis labels.
+      for (let i = 0; i <= 4; i++) {
+        const value = config.yMax * i / 4;
+        const y = yScale(value);
+
+        context.beginPath();
+        context.strokeStyle = graphColors.grid;
+        context.moveTo(margin.left, y);
+        context.lineTo(width - margin.right, y);
+        context.stroke();
+
+        context.fillStyle = graphColors.text;
+        context.textAlign = "right";
+        context.textBaseline = "middle";
+        context.fillText(value.toFixed(config.yDecimals), margin.left - 9, y);
+      }
+
+      // Vertical grid lines and x-axis labels.
+      for (let i = 0; i <= 4; i++) {
+        const value = config.xMax * i / 4;
+        const x = xScale(value);
+
+        context.beginPath();
+        context.strokeStyle = graphColors.grid;
+        context.moveTo(x, margin.top);
+        context.lineTo(x, margin.top + plotHeight);
+        context.stroke();
+
+        context.fillStyle = graphColors.text;
+        context.textAlign = "center";
+        context.textBaseline = "top";
+        context.fillText(value.toFixed(2), x, margin.top + plotHeight + 10);
+      }
+
+      // Axes.
+      context.strokeStyle = "#9aadc1";
+      context.lineWidth = 1.4;
+      context.beginPath();
+      context.moveTo(margin.left, margin.top);
+      context.lineTo(margin.left, margin.top + plotHeight);
+      context.lineTo(width - margin.right, margin.top + plotHeight);
+      context.stroke();
+
+      // X-axis title.
+      context.fillStyle = graphColors.ink;
+      context.font = "600 12px DM Sans, sans-serif";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(config.xLabel, margin.left + plotWidth / 2, height - 13);
+
+      // Rotated y-axis title.
+      context.save();
+      context.translate(15, margin.top + plotHeight / 2);
+      context.rotate(-Math.PI / 2);
+      context.textAlign = "center";
+      context.fillText(config.yLabel, 0, 0);
+      context.restore();
+
+      // Curve.
+      context.beginPath();
+      context.strokeStyle = config.color;
+      context.lineWidth = 3;
+      context.lineJoin = "round";
+
+      config.data.forEach((point, index) => {
+        const x = xScale(point.x);
+        const y = yScale(point.y);
+
+        if (index === 0) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      });
+
+      context.stroke();
+
+      // Maximum-power marker.
+      if (config.marker) {
+        const markerX = xScale(config.marker.x);
+        const markerY = yScale(config.marker.y);
+
+        context.beginPath();
+        context.setLineDash([4, 4]);
+        context.strokeStyle = graphColors.gold;
+        context.lineWidth = 1.5;
+        context.moveTo(markerX, markerY);
+        context.lineTo(markerX, margin.top + plotHeight);
+        context.stroke();
+        context.setLineDash([]);
+
+        context.beginPath();
+        context.fillStyle = graphColors.gold;
+        context.arc(markerX, markerY, 5, 0, Math.PI * 2);
+        context.fill();
+
+        context.strokeStyle = "#fff";
+        context.lineWidth = 2;
+        context.stroke();
+
+        context.fillStyle = graphColors.ink;
+        context.font = "700 11px DM Sans, sans-serif";
+        context.textAlign = markerX > width * .65 ? "right" : "left";
+        const labelX = markerX > width * .65 ? markerX - 9 : markerX + 9;
+        const labelY = Math.max(margin.top + 10, markerY - 14);
+        context.fillText("MPP", labelX, labelY);
+      }
+    }
+
+    function updateSimulation() {
+      const irradiance = Number(irradianceSlider.value);
+      const result = calculateSolarCell(irradiance);
+
+      irradianceValue.textContent = irradiance + " W/m²";
+
+      document.getElementById("simIsc").textContent =
+        result.isc.toFixed(2) + " A";
+
+      document.getElementById("simVoc").textContent =
+        result.voc.toFixed(3) + " V";
+
+      document.getElementById("simPmax").textContent =
+        result.pmax.toFixed(2) + " W";
+
+      document.getElementById("simVmp").textContent =
+        result.vmp.toFixed(3) + " V";
+
+      const ivData = result.points.map(point => ({
+        x: point.voltage,
+        y: point.current
+      }));
+
+      const pvData = result.points.map(point => ({
+        x: point.voltage,
+        y: point.power
+      }));
+
+      const maxPowerScale = Math.max(0.5, result.isc * result.voc * 0.32);
+
+      drawChart(ivContext, ivCanvas, {
+        data: ivData,
+        xMax: result.voc,
+        yMax: result.isc * 1.1,
+        xLabel: "Voltage (V)",
+        yLabel: "Current (A)",
+        yDecimals: 1,
+        color: graphColors.blue,
+        marker: { x: result.vmp, y: result.imp }
+      });
+
+      drawChart(pvContext, pvCanvas, {
+        data: pvData,
+        xMax: result.voc,
+        yMax: maxPowerScale * 1.18,
+        xLabel: "Voltage (V)",
+        yLabel: "Power (W)",
+        yDecimals: 1,
+        color: graphColors.green,
+        marker: { x: result.vmp, y: result.pmax }
+      });
+    }
+
+    irradianceSlider.addEventListener("input", updateSimulation);
+
+    document.getElementById("resetGraphs").addEventListener("click", () => {
+      irradianceSlider.value = "1000";
+      updateSimulation();
+    });
+
+    // Redraw the charts when the layout changes.
+    let resizeTimer;
+
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateSimulation, 120);
+    });
+
+    updateSimulation();
+  </script>
 </body>
 </html>
