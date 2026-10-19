@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Solar Cells: Physics, Properties, Efficiency and Applications</title>
+
+<meta name="description"
+content="Detailed scientific guide to solar cells, photovoltaic effect, semiconductor properties, I-V characteristics, fill factor, efficiency, interactive graphs and renewable energy applications.">
+
+<meta name="robots" content="index, follow">
+<meta name="author" content="Moez Hajji">
+
+<style>
+:root {
+  --navy: #102a43;
+  --blue: #1677bd;
+  --gold: #ffc857;
+  --light: #f1f7fc;
+  --text: #243b53;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font: 17px/1.8 Arial, sans-serif;
+  color: var(--text);
+  background: #f5f8fb;
+}
+header {
+  padding: 65px 7%;
+  color: white;
+  background: linear-gradient(130deg, #102a43, #1677bd);
+}
+header h1 {
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.15;
+  max-width: 950px;
+}
+header p { max-width: 850px; font-size: 20px; }
+nav {
+  background: white;
+  padding: 16px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #d9e2ec;
+}
+nav a {
+  display: inline-block;
+  margin: 4px 12px 4px 0;
+  color: #1266a4;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+main { max-width: 1100px; margin: auto; padding: 24px; }
+section {
+  background: white;
+  margin: 22px 0;
+  padding: clamp(20px, 4vw, 38px);
+  border-radius: 15px;
+  border: 1px solid #d9e2ec;
+}
+h2 { color: var(--navy); line-height: 1.3; }
+h3 { color: #1769aa; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--light);
+  padding: 18px;
+  border-radius: 10px;
+}
+.formula {
+  background: var(--navy);
+  color: white;
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+.note {
+  border-left: 5px solid var(--blue);
+  background: var(--light);
+  padding: 14px 18px;
+}
+table { border-collapse: collapse; width: 100%; }
+th, td {
+  border: 1px solid #d9e2ec;
+  padding: 12px;
+  text-align: left;
+}
+th { background: #eaf3fb; }
+.table-scroll { overflow-x: auto; }
+canvas {
+  width: 100%;
+  height: 340px;
+  display: block;
+  border: 1px solid #d9e2ec;
+  border-radius: 10px;
+}
+label { display: block; margin: 12px 0; }
+input { max-width: 100%; }
+footer {
+  background: var(--navy);
+  color: white;
+  padding: 30px 7%;
+  text-align: center;
+}
+@media(max-width:600px) {
+  main { padding: 12px; }
+  section { padding: 18px; }
+  nav { position: relative; }
+  canvas { height: 280px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <p>PHOTOVOLTAICS · SEMICONDUCTOR PHYSICS · CLEAN ENERGY</p>
+  <h1>Solar Cells: Working Principle, Properties, Characteristics and Applications</h1>
+  <p>
+    Explore the physics of photovoltaic energy conversion, the properties
+    of semiconductor materials, electrical performance parameters,
+    interactive solar-cell graphs and the role of solar energy in a
+    sustainable future.
+  </p>
+</header>
+
+<nav aria-label="Main navigation">
+  <a href="#importance">Importance</a>
+  <a href="#definition">Definition</a>
+  <a href="#principle">Physics</a>
+  <a href="#materials">Materials</a>
+  <a href="#properties">Properties</a>
+  <a href="#characteristics">Characteristics</a>
+  <a href="#graphs">Graphs</a>
+  <a href="#applications">Applications</a>
+  <a href="#references">References</a>
+</nav>
+
+<main>
+
+<section id="importance">
+<h2>1. Importance of Solar Cells</h2>
+
+<p>
+Solar cells are essential components of modern renewable-energy
+systems. They convert solar radiation directly into electricity
+without combustion during operation. Photovoltaic technology can
+contribute to energy security, lower operational emissions and
+electrification in locations connected or not connected to an
+electricity grid.
+</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>Renewable energy</h3>
+    Sunlight is a naturally replenished energy resource. Photovoltaic
+    systems help diversify the electricity supply.
+  </div>
+  <div class="card">
+    <h3>Environmental benefits</h3>
+    Electricity generation requires no fuel combustion at the panel.
+    Manufacturing, transport and end-of-life impacts must also be
+    considered in a complete life-cycle assessment.
+  </div>
+  <div class="card">
+    <h3>Energy independence</h3>
+    Rooftop systems and solar farms can reduce dependence on imported
+    fuels and diversify local energy production.
+  </div>
+  <div class="card">
+    <h3>Remote applications</h3>
+    Solar systems can power sensors, telecommunications, lighting,
+    irrigation and equipment in remote areas.
+  </div>
+</div>
+
+<p>
+Solar electricity is variable because irradiance changes with time,
+weather, season and shading. Batteries, grid interconnection and
+complementary energy sources can help balance supply and demand.
+</p>
+</section>
+
+<section id="definition">
+<h2>2. Definition of a Solar Cell</h2>
+
+<p>
+A <strong>solar cell</strong>, also called a
+<strong>photovoltaic cell</strong>, is a semiconductor device that
+converts incident light into electrical energy through the
+photovoltaic effect.
+</p>
+
+<p>
+A solar cell absorbs photons and generates mobile charge carriers.
+An internal electric field or selective electrical contacts help
+separate and collect electrons and holes. When the contacts are
+connected through an external circuit, electrical current can flow
+and deliver power to a load.
+</p>
+
+<div class="note">
+<strong>Energy-conversion sequence:</strong>
+sunlight → photon absorption → electron–hole pair generation →
+charge separation → current through an external circuit.
+</div>
+</section>
+
+<section id="principle">
+<h2>3. Physical Principle and Operation</h2>
+
+<h3>3.1 Photon absorption</h3>
+<p>
+Light consists of photons carrying energy. The energy of a photon is
+related to its frequency and wavelength by:
+</p>
+
+<div class="formula">E = hν = hc / λ</div>
+
+<p>
+Here, h is Planck's constant, ν is frequency, c is the speed of light
+and λ is wavelength. In a semiconductor, photons with sufficient
+energy can excite electrons into higher-energy states, leaving holes
+behind.
+</p>
+
+<h3>3.2 Electron–hole pair generation</h3>
+<p>
+In a simplified band model, a photon can generate an electron–hole
+pair when its energy is at least comparable to the semiconductor
+band gap, Eg. Photons with lower energy generally cannot generate
+carriers across that gap.
+</p>
+
+<div class="formula">Photon energy ≥ semiconductor band-gap energy</div>
+
+<h3>3.3 Charge separation</h3>
+<p>
+A p–n junction or another charge-selective structure helps separate
+electrons and holes. The internal electric field and interfaces
+direct carriers toward their appropriate contacts, reducing the
+chance that they recombine before collection.
+</p>
+
+<h3>3.4 Electrical power generation</h3>
+<p>
+When a load connects the two contacts, the cell supplies current at
+a voltage. The useful electrical power is the product of voltage
+and current.
+</p>
+
+<div class="formula">P = V × I</div>
+
+<h3>3.5 Recombination and energy losses</h3>
+<p>
+Not every incident photon produces a collected carrier. Reflection,
+transmission, thermalization, recombination and resistive losses
+reduce conversion efficiency. Materials engineering and improved
+interfaces can reduce some of these losses.
+</p>
+</section>
+
+<section id="materials">
+<h2>4. Solar-Cell Structure and Materials</h2>
+
+<p>
+A conventional solar cell can contain a light-absorbing
+semiconductor, a junction or selective contacts, a front contact,
+a rear contact and optical coatings. At module level, protective
+glass, encapsulation and interconnections protect and combine cells.
+</p>
+
+<div class="table-scroll">
+<table>
+<thead>
+<tr><th>Component</th><th>Function</th></tr>
+</thead>
+<tbody>
+<tr><td>Absorber layer</td><td>Absorbs photons and generates charge carriers.</td></tr>
+<tr><td>Junction / selective contacts</td><td>Separate and extract electrons and holes.</td></tr>
+<tr><td>Front electrode</td><td>Collects current while allowing light to enter.</td></tr>
+<tr><td>Anti-reflection coating</td><td>Reduces reflection losses.</td></tr>
+<tr><td>Rear electrode</td><td>Provides the second electrical contact.</td></tr>
+<tr><td>Encapsulation</td><td>Protects module components from environmental exposure.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Common absorber materials</h3>
+<ul>
+<li>Crystalline silicon.</li>
+<li>Cadmium telluride (CdTe).</li>
+<li>Copper indium gallium selenide (CIGS).</li>
+<li>Metal-halide perovskites.</li>
+<li>Organic semiconductor materials.</li>
+<li>Multijunction combinations of different absorbers.</li>
+</ul>
+</section>
+
+<section id="properties">
+<h2>5. Important Physical Properties</h2>
+
+<div class="card-grid">
+<div class="card">
+<h3>Band gap</h3>
+Determines the minimum photon energy needed for excitation and
+strongly influences the voltage and spectral response.
+</div>
+<div class="card">
+<h3>Absorption coefficient</h3>
+Describes how strongly a material absorbs light at a particular
+wavelength.
+</div>
+<div class="card">
+<h3>Carrier mobility</h3>
+Describes how readily electrons or holes move under an electric
+field.
+</div>
+<div class="card">
+<h3>Carrier lifetime</h3>
+Indicates how long generated carriers survive before recombination.
+</div>
+<div class="card">
+<h3>Defect density</h3>
+Defects can provide recombination pathways and reduce carrier
+collection.
+</div>
+<div class="card">
+<h3>Stability</h3>
+Thermal, chemical and environmental stability affect device
+reliability and service life.
+</div>
+</div>
+
+<p>
+The best absorber is not determined by one property alone.
+Researchers must consider band gap, optical absorption, carrier
+transport, recombination, contacts, stability, manufacturing cost,
+material availability and environmental impact together.
+</p>
+</section>
+
+<section id="characteristics">
+<h2>6. Electrical Characteristics of Solar Cells</h2>
+
+<h3>6.1 Short-circuit current (Isc)</h3>
+<p>
+The short-circuit current is the current delivered when the
+terminal voltage is zero. It depends strongly on illumination,
+active area, optical absorption and carrier collection.
+</p>
+
+<h3>6.2 Open-circuit voltage (Voc)</h3>
+<p>
+The open-circuit voltage is measured when the external current is
+zero. It depends on the semiconductor, recombination, temperature
+and illumination.
+</p>
+
+<h3>6.3 Maximum power point</h3>
+<p>
+The maximum power point is the operating point where the product
+of current and voltage is greatest.
+</p>
+
+<div class="formula">Pmax = Vmp × Imp</div>
+
+<h3>6.4 Fill factor</h3>
+<p>
+The fill factor measures the quality or rectangularity of the
+current–voltage curve.
+</p>
+
+<div class="formula">FF = Pmax / (Voc × Isc)</div>
+
+<p>
+A fill factor closer to 1 indicates that the maximum output power
+is closer to the product of open-circuit voltage and short-circuit
+current. Resistive losses and recombination can reduce FF.
+</p>
+
+<h3>6.5 Power-conversion efficiency</h3>
+<div class="formula">η = Pmax / Pin × 100%</div>
+
+<p>
+Pin is the optical power incident on the device. Combining the
+definitions gives:
+</p>
+
+<div class="formula">
+η = (Voc × Isc × FF) / Pin × 100%
+</div>
+
+<p>
+For current density Jsc, use incident irradiance and power density
+consistently.
+</p>
+
+<div class="note">
+For common terrestrial photovoltaic measurements, standard test
+conditions typically use 1000 W/m² irradiance, an AM1.5 reference
+spectrum and a cell temperature of 25 °C. Always state measurement
+conditions when comparing solar cells.
+</div>
+
+<h3>6.6 Other characterization parameters</h3>
+<ul>
+<li>External and internal quantum efficiency.</li>
+<li>Series resistance and shunt resistance.</li>
+<li>Temperature coefficients.</li>
+<li>Spectral response.</li>
+<li>Dark and illuminated current–voltage measurements.</li>
+</ul>
+</section>
+
+<section id="graphs">
+<h2>7. Interactive Solar-Cell Characteristics</h2>
+
+<p>
+The following graphs are generated from an illustrative mathematical
+model. They are educational examples, not experimental data for a
+specific solar-cell technology.
+</p>
+
+<label>
+Short-circuit current Isc:
+<span id="iscText">8.0 A</span><br>
+<input id="isc" type="range" min="2" max="12" step="0.5" value="8">
+</label>
+
+<label>
+Open-circuit voltage Voc:
+<span id="vocText">0.65 V</span><br>
+<input id="voc" type="range" min="0.35" max="0.8" step="0.01" value="0.65">
+</label>
+
+<label>
+Curve-shape parameter:
+<span id="nText">10</span><br>
+<input id="n" type="range" min="4" max="20" step="1" value="10">
+</label>
+
+<p><strong>Maximum power:</strong> <span id="powerText">—</span></p>
+
+<h3>Current versus voltage (I–V)</h3>
+<canvas id="iv" aria-label="Illustrative solar cell current voltage graph"></canvas>
+
+<p>
+At zero voltage, the current is approximately Isc. As voltage
+approaches Voc, the current falls toward zero. The bend or knee
+indicates the region where the cell can deliver its maximum power.
+</p>
+
+<h3>Power versus voltage (P–V)</h3>
+<canvas id="pv" aria-label="Illustrative solar cell power voltage graph"></canvas>
+
+<p>
+The P–V curve is calculated using P = V × I. Its peak corresponds
+to the maximum power point, which is important for maximum-power
+point tracking in practical photovoltaic systems.
+</p>
+
+<h3>Worked numerical example</h3>
+<p>
+Suppose a hypothetical cell has Voc = 0.65 V, Isc = 8.0 A and
+FF = 0.75. Its estimated maximum power is:
+</p>
+<div class="formula">Pmax = 0.65 × 8.0 × 0.75 = 3.90 W</div>
+<p>
+If the incident optical power is 20 W, the efficiency is
+3.90 / 20 × 100% = 19.5%. These figures are illustrative only.
+</p>
+</section>
+
+<section id="applications">
+<h2>8. Applications of Solar Cells</h2>
+<div class="card-grid">
+<div class="card"><h3>Residential</h3>Rooftop electricity generation for homes.</div>
+<div class="card"><h3>Industrial</h3>Commercial roofs and large photovoltaic plants.</div>
+<div class="card"><h3>Agriculture</h3>Irrigation pumps, water management and sensors.</div>
+<div class="card"><h3>Remote systems</h3>Telecommunications, lighting and standalone equipment.</div>
+<div class="card"><h3>Space technology</h3>Electrical power for satellites and spacecraft.</div>
+<div class="card"><h3>Emerging research</h3>Tandem photovoltaics, indoor cells and solar-powered hydrogen.</div>
+</div>
+</section>
+
+<section id="limitations">
+<h2>9. Advantages and Limitations</h2>
+<div class="card-grid">
+<div class="card">
+<h3>Advantages</h3>
+<ul>
+<li>No fuel combustion during generation.</li>
+<li>Modular and scalable design.</li>
+<li>Suitable for grid-connected or off-grid systems.</li>
+<li>Can reduce purchased electricity.</li>
+<li>Pairs with battery storage.</li>
+</ul>
+</div>
+<div class="card">
+<h3>Limitations</h3>
+<ul>
+<li>Output varies with sunlight and weather.</li>
+<li>Shading can reduce performance.</li>
+<li>Storage and power electronics may add cost.</li>
+<li>Manufacturing requires materials and energy.</li>
+<li>Recycling and end-of-life management are important.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="references">
+<h2>10. Scientific References and Further Reading</h2>
+<ol>
+<li>
+U.S. Department of Energy:
+<a href="https://www.energy.gov/cmei/systems/solar-photovoltaic-cell-basics">
+Solar Photovoltaic Cell Basics
+</a>.
+</li>
+<li>
+National Renewable Energy Laboratory:
+<a href="https://www.nrel.gov/pv/cell-efficiency.html">
+Best Research-Cell Efficiency Chart
+</a>.
+</li>
+<li>
+National Renewable Energy Laboratory:
+<a href="https://www.nrel.gov/pv/device-performance.html">
+Photovoltaic Device Performance
+</a>.
+</li>
+<li>
+Google Search Central:
+<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">
+Build and Submit a Sitemap
+</a>.
+</li>
+<li>
+Google Search Console:
+<a href="https://support.google.com/webmasters/answer/7474347">
+Troubleshoot Pages Missing from Google Search
+</a>.
+</li>
+</ol>
+<p>
+This page is an educational introduction. For research-grade
+comparisons, use verified experimental data, relevant standards
+and documented measurement conditions.
+</p>
+</section>
+
+</main>
+
+<footer>
+<p>Solar Cells — Photovoltaic Physics and Renewable Energy</p>
+<p>Educational resource · Semiconductor materials · Solar energy</p>
+</footer>
+
+<script>
+const isc = document.getElementById("isc");
+const voc = document.getElementById("voc");
+const n = document.getElementById("n");
+
+function current(v, I, V, shape) {
+  if (v <= 0) return I;
+  if (v >= V) return 0;
+  return I * (1 - Math.pow(v / V, shape));
+}
+
+function graph(canvasId, type, I, V, shape) {
+  const canvas = document.getElementById(canvasId);
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = Math.max(300, rect.width * dpr);
+  canvas.height = rect.height * dpr;
+
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  const m = {left: 55, right: 15, top: 35, bottom: 45};
+  const pw = w - m.left - m.right;
+  const ph = h - m.top - m.bottom;
+
+  const points = [];
+  let maxP = 0, bestV = 0;
+
+  for (let k = 0; k <= 300; k++) {
+    const v = V * k / 300;
+    const i = current(v, I, V, shape);
+    const p = v * i;
+    points.push({v, i, p});
+    if (p > maxP) {
+      maxP = p;
+      bestV = v;
+    }
+  }
+
+  const ymax = type === "iv" ? I * 1.12 : maxP * 1.2;
+  const xmax = V * 1.08;
+  const X = v => m.left + v / xmax * pw;
+  const Y = y => m.top + ph - y / ymax * ph;
+
+  ctx.clearRect(0, 0, w, h);
+  ctx.font = "12px Arial";
+  ctx.strokeStyle = "#e0e8f0";
+  ctx.fillStyle = "#526579";
+
+  for (let k = 0; k <= 5; k++) {
+    const x = xmax * k / 5;
+    ctx.beginPath();
+    ctx.moveTo(X(x), m.top);
+    ctx.lineTo(X(x), m.top + ph);
+    ctx.stroke();
+    ctx.textAlign = "center";
+    ctx.fillText(x.toFixed(2), X(x), m.top + ph + 20);
+  }
+
+  for (let k = 0; k <= 4; k++) {
+    const y = ymax * k / 4;
+    ctx.beginPath();
+    ctx.moveTo(m.left, Y(y));
+    ctx.lineTo(m.left + pw, Y(y));
+    ctx.stroke();
+    ctx.textAlign = "right";
+    ctx.fillText(y.toFixed(1), m.left - 8, Y(y) + 4);
+  }
+
+  ctx.strokeStyle = "#526579";
+  ctx.beginPath();
+  ctx.moveTo(m.left, m.top);
+  ctx.lineTo(m.left, m.top + ph);
+  ctx.lineTo(m.left + pw, m.top + ph);
+  ctx.stroke();
+
+  ctx.fillStyle = "#102a43";
+  ctx.font = "bold 13px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText(
+    type === "iv" ? "Current–Voltage Characteristic" :
+                    "Power–Voltage Characteristic",
+    w / 2, 19
+  );
+
+  ctx.font = "12px Arial";
+  ctx.fillText("Voltage (V)", m.left + pw / 2, h - 7);
+
+  ctx.save();
+  ctx.translate(15, m.top + ph / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText(type === "iv" ? "Current (A)" : "Power (W)", 0, 0);
+  ctx.restore();
+
+  ctx.strokeStyle = "#1677bd";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+
+  points.forEach((p, k) => {
+    const x = X(p.v);
+    const y = Y(type === "iv" ? p.i : p.p);
+    if (k === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  const bestI = current(bestV, I, V, shape);
+  const bx = X(bestV);
+  const by = Y(type === "iv" ? bestI : maxP);
+
+  ctx.fillStyle = "#ffc857";
+  ctx.beginPath();
+  ctx.arc(bx, by, 5, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.fillStyle = "#102a43";
+  ctx.textAlign = "left";
+  ctx.fillText(
+    type === "iv" ? "Maximum power point" : "Pmax = " + maxP.toFixed(2) + " W",
+    Math.min(bx + 8, w - 145),
+    Math.max(by - 10, 45)
+  );
+
+  return {maxP, bestV, bestI};
+}
+
+function update() {
+  const I = Number(isc.value);
+  const V = Number(voc.value);
+  const shape = Number(n.value);
+
+  document.getElementById("iscText").textContent = I.toFixed(1) + " A";
+  document.getElementById("vocText").textContent = V.toFixed(2) + " V";
+  document.getElementById("nText").textContent = shape;
+
+  const result = graph("iv", "iv", I, V, shape);
+  graph("pv", "pv", I, V, shape);
+
+  document.getElementById("powerText").textContent =
+    result.maxP.toFixed(2) + " W at " +
+    result.bestV.toFixed(2) + " V";
+}
+
+[isc, voc, n].forEach(el => el.addEventListener("input", update));
+window.addEventListener("resize", update);
+update();
+</script>
+
+</body>
+</html>
